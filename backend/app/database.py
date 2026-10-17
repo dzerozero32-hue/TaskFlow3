@@ -7,6 +7,13 @@ engine = create_engine(settings.database_url)
 
 SessionLocal = sessionmaker(bind=engine)
 
+def get_session():
+    session = SessionLocal()
+    try:
+        yield session
+    finally:
+        session.close()
+
 
 class Base(DeclarativeBase):
     pass
